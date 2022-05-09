@@ -9,5 +9,8 @@ def index(request):
     return render(request,"index.html",contest
     )
 
-def about(request):
-    return HttpResponse("This is about page")
+def about_us(request):
+    return render(request,"about_us.html")
+
+def contact_us(request):
+    return render(request,"contact_us.html")
