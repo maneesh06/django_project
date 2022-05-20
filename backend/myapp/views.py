@@ -48,10 +48,6 @@ def user_list(request):
         )
         data = json_dump(data)
         return Response(data,status=status.HTTP_201_CREATED)
-        
-            
-
-        
         #     return Response(seralizer.data,status = status.HTTP_201_CREATED)
         # else:
         return Response(status=status.HTTP_200_OK)
