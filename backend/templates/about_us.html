@@ -1,14 +1,10 @@
-<!DOCTYPE html>
+{% extends 'base.html' %}
+{% comment %} {% load static %} {% endcomment %}
 
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/static/css/style1.css">
-   </head>
+{% block css1 %}<link rel="stylesheet" href="/static/css/style1.css">{% endblock css1 %}
+{% block title %}Prashant{% endblock title %}
 
-<body>
+{% block body %}
 <div class="about-section">
     <h1>Mission & Vision</h1>
     <p>Some text about who we are and what we do.</p>
@@ -16,10 +12,10 @@
   </div>
   
   <h2 style="text-align:center">Our Mentor</h2>
-  <div class="row">
+  <div class="row" >
     <div class="column">
       <div class="card">
-        <img src="" alt="Maneesh" style="width:20%;height:50%">
+        <img  src="/static/images/rajiv.jpg" alt="Rajiv Kumar Singh" style="width:100">
         <div class="container">
           <h2>Jane Doe</h2>
           <p class="title">CEO & Founder</p>
@@ -30,7 +26,7 @@
       </div>
     </div>
   
-    <div class="column">
+    {% comment %} <div class="column">
       <div class="card">
         <img src="/w3images/team2.jpg" alt="Mike" style="width:100%">
         <div class="container">
@@ -41,9 +37,9 @@
           <p><button class="button">Contact</button></p>
         </div>
       </div>
-    </div>
+    </div> {% endcomment %}
   
-    <div class="column">
+    {% comment %} <div class="column">
       <div class="card">
         <img src="/w3images/team3.jpg" alt="John" style="width:100%">
         <div class="container">
@@ -53,8 +49,8 @@
           <p>john@example.com</p>
           <p><button class="button">Contact</button></p>
         </div>
-      </div>
-    </div>
+      </div> {% endcomment %}
+    {% comment %} </div> {% endcomment %}
   </div>
 
 
@@ -63,9 +59,10 @@
     <div class="faculties">
       
       <div class="unit">
-        <img src="https://vidyasheela.com/web-contents/website-components/About-Us-Pages/responsive-about-us-page-html/Principal.jpg" alt="">
+        <img src="/static/images/ajeet.jpg" alt="Ajeet">
         <p>Ajeet Kumar</p>
-        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Natus unde aliquid laborum voluptatum distinctio nobis?'</p>
+        <p>Highly enthusiastic about learning and practically implementing technologies specially related to deep learning. I wish to learn and acquire skills that can shape me as a valued professional 
+          in the AI field and also evaluate my inherent abilities, and potential.</p>
 
       </div>
       <div class="unit">
@@ -75,17 +72,17 @@
 
       </div>
       <div class="unit">
-        <img src="https://vidyasheela.com/web-contents/website-components/About-Us-Pages/responsive-about-us-page-html/vice-principal.jpg" alt="">
+        <img  src="/static/images/prashant.jpg" alt="Prashant">
         <p>Prashant Singh</p>
         <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Natus unde aliquid laborum voluptatum distinctio nobis?'</p>
       
     </div>
     <div class="unit">
-        <img src="https://vidyasheela.com/web-contents/website-components/About-Us-Pages/responsive-about-us-page-html/vice-principal.jpg" alt="">
+        <img src="/static/images/pranjal.jpeg" alt="Pranjal Mittal">
         <p>Pranjal Mittal</p>
         <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Natus unde aliquid laborum voluptatum distinctio nobis?'</p>
       </div>
     </div>
   </div>
-</body>
-</html>
+
+{% endblock body %}

@@ -21,9 +21,11 @@ def index(request):
     print(contest["data"][0])
     # json_object = json.dumps(contest, indent = 4) 
     # print(json_object)
-    return JsonResponse(contest)
+    # return JsonResponse(contest)
     # return render(request,"home.html",contest)
     return render(request,"index.html",contest)
+def prashant(request):
+    return render(request,"home.html")
 
 def about_us(request):
     return render(request,"about_us.html")

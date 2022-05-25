@@ -29,7 +29,7 @@ DEBUG = True
 ALLOWED_HOSTS = [
   'localhost',
   '127.0.0.1',
-  'e0a8-2409-4063-6e80-b006-a117-6884-3afc-8e3f.in.ngrok.io']
+  'd216-2409-4063-6e80-b006-49a5-bee9-b379-d6e1.in.ngrok.io']
 
 
 # Application definition

@@ -1,4 +1,57 @@
-{% extends 'nav.html' %}
+{% extends 'base.html' %}
 {% load static %}
 
-{% block body %}<h1>Wlcome to home page</h1>{% endblock body %}
+{% block css1 %}<link rel="stylesheet" href="/static/css/style.css">{% endblock css1 %}
+{% block title %}Prashant{% endblock title %}
+
+{% block body %}
+
+    <div class="container">
+        <div class="content">
+            <div class="left-side">
+                <div class="address details">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div class="topic">Address</div>
+                    <div class="text-one">ECE Department, IET Lucknow</div>
+                    <div class="text-two">Sitapur Road,Lucknow</div>
+                    <div class="text-two">Uttar Pradesh, India</div>
+                    <div class="text-two">Pin Code : 226021</div>
+                </div>
+                <div class="phone details">
+                    <i class="fas fa-phone-alt"></i>
+                    <div class="topic">Phone</div>
+                    <div class="text-one">+91 6397777358</div>
+                    <div class="text-two">+91 7318536221</div>
+                </div>
+                <div class="email details">
+                    <i class="fas fa-envelope"></i>
+                    <div class="topic">Email</div>
+                    <div class="text-one">1805231005@ietlucknow.ac.in</div>
+                    <div class="text-two">1805231032@ietlucknow.ac.in</div>
+                    <div class="text-two">1805231037@ietlucknow.ac.in</div>
+                    <div class="text-two">19052310067@ietlucknow.ac.in</div>
+                </div>
+            </div>
+            <div class="right-side">
+                <div class="topic-text">Send us a message</div>
+                <p>If you have any work from me or any types of quries related to my tutorial, you can send me message from here. It's my pleasure to help you.</p>
+                <form action="#">
+                    <div class="input-box">
+                        <input type="text" placeholder="Enter your name">
+                    </div>
+                    <div class="input-box">
+                        <input type="text" placeholder="Enter your email">
+                    </div>
+                    <div class="input-box message-box">
+                        <input type="text" placeholder="Message">
+                    </div>
+                    <div class="button">
+                        <input type="button" value="Send Now" >
+                    </div>
+                </form>
+            </div>
+    </div>
+  </div>
+
+
+{% endblock body %}

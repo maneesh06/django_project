@@ -2,7 +2,7 @@ body {
     font-family: Arial, Helvetica, sans-serif;
     margin: 0;
   }
-  
+
   html {
     box-sizing: border-box;
   }
@@ -108,3 +108,14 @@ body {
       display: block;
     }
   }
+  #mentor{
+    height: 60px;
+    background-color: blue;
+    flex-direction: column;
+}
+
+.flex-all-center{
+    
+    justify-content: center;
+    align-items: center;
+}
