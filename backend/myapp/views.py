@@ -4,8 +4,12 @@ from django.shortcuts import render, HttpResponse
 from matplotlib.font_manager import json_dump
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.authentication import BasicAuthentication, SessionAuthentication
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.decorators import authentication_classes,permission_classes
+
 from myapp.models import UserData
-import json
+
 from rest_framework.decorators import api_view
 from myapp.seralizers import UserDataSeralizer
 from django.http.response import StreamingHttpResponse
@@ -13,17 +17,8 @@ from myapp.camera import VideoCamera, IPWebCam
 
 # Create your views here.
 def index(request):
-    data = UserData.objects.all()
-    # return HttpResponse("welcome to home page")
-    contest = {
-        "data" : list(data.values('first_name'))
-    }
-    print(contest["data"][0])
-    # json_object = json.dumps(contest, indent = 4) 
-    # print(json_object)
-    # return JsonResponse(contest)
-    # return render(request,"home.html",contest)
-    return render(request,"index.html",contest)
+    return render(request,"index.html")
+
 def prashant(request):
     return render(request,"home.html")
 
@@ -35,11 +30,14 @@ def contact_us(request):
 
 
 @api_view(['GET','POST'])
+@authentication_classes([ BasicAuthentication])
+@permission_classes([IsAuthenticated])
 def user_list(request):
     # to call get method response = requests.get("http://127.0.0.1:8000/user")
     if(request.method == 'GET'):
         user = UserData.objects.all()
         seralizer = UserDataSeralizer(user,many=True)
+ 
         return Response(seralizer.data)
     # to call post metnod requests.post("http://127.0.0.1:8000/user",{'first_name':'ajeet1','last_name':'yadav1'})
     elif request.method == 'POST':
