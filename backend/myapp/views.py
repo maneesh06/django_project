@@ -30,8 +30,8 @@ def contact_us(request):
 
 
 @api_view(['GET','POST'])
-@authentication_classes([ BasicAuthentication])
-@permission_classes([IsAuthenticated])
+# @authentication_classes([ BasicAuthentication])
+# @permission_classes([IsAuthenticated])
 def user_list(request):
     # to call get method response = requests.get("http://127.0.0.1:8000/user")
     if(request.method == 'GET'):
