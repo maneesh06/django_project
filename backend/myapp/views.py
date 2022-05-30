@@ -3,15 +3,15 @@ from django.http import JsonResponse
 from django.shortcuts import render, HttpResponse
 from matplotlib.font_manager import json_dump
 from rest_framework.response import Response
-from rest_framework import status
-from rest_framework.authentication import BasicAuthentication, SessionAuthentication
-from rest_framework.permissions import IsAuthenticated
+from rest_framework import status,generics
+
+
 from rest_framework.decorators import authentication_classes,permission_classes
 
 from myapp.models import UserData
 
 from rest_framework.decorators import api_view
-from myapp.seralizers import UserDataSeralizer
+from myapp.seralizers import UserDataSeralizer,SetPagination
 from django.http.response import StreamingHttpResponse
 from myapp.camera import VideoCamera, IPWebCam
 
@@ -29,6 +29,7 @@ def contact_us(request):
     return render(request,"contact_us.html")
 
 
+
 @api_view(['GET','POST'])
 # @authentication_classes([ BasicAuthentication])
 # @permission_classes([IsAuthenticated])
@@ -37,12 +38,13 @@ def user_list(request):
     if(request.method == 'GET'):
         user = UserData.objects.all()
         seralizer = UserDataSeralizer(user,many=True)
- 
+
+
         return Response(seralizer.data)
     # to call post metnod requests.post("http://127.0.0.1:8000/user",{'first_name':'ajeet1','last_name':'yadav1'})
     elif request.method == 'POST':
         data = request.data
-        user = UserData.objects.create(
+        user = UserData.objects.get_or_create(
             first_name = data["first_name"],
             last_name = data["last_name"]
         )

@@ -29,7 +29,7 @@ DEBUG = True
 ALLOWED_HOSTS = [
   'localhost',
   '127.0.0.1',
-  'd216-2409-4063-6e80-b006-49a5-bee9-b379-d6e1.in.ngrok.io']
+  '9638-2409-4063-6e80-b006-c45c-9393-4666-ff4a.in.ngrok.io']
 
 
 # Application definition
@@ -45,9 +45,14 @@ INSTALLED_APPS = [
     'rest_framework',
 ]
 
+# REST_FRAMEWORK = {
+#     'DEFAULT_AUTHENTICATION_CLASSES':['rest_framework.authentication.BasicAuthentication'],
+#     'DEFAULT_PERMISSION_CLASSES':['rest_framework.permissions.IsAuthenticated']
+# }
+
 REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES':['rest_framework.authentication.BasicAuthentication'],
-    'DEFAULT_PERMISSION_CLASSES':['rest_framework.permissions.IsAuthenticated']
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'PAGE_SIZE': 10,
 }
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
