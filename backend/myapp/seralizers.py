@@ -1,12 +1,17 @@
 from dataclasses import fields
 from rest_framework.pagination import PageNumberPagination
 from rest_framework import serializers
-from myapp.models import UserData
+from myapp.models import Person,PersonVisit
 
-class UserDataSeralizer(serializers.ModelSerializer):
+class PersonSeralizer(serializers.ModelSerializer):
     class Meta:
-        model = UserData
+        model = Person
         fields = ['id','first_name','last_name','captured_on']
+
+class PersonVisitSeralizer(serializers.ModelSerializer):
+    class Meta:
+        model = PersonVisit
+        fields = ['id','person','captured_on']
 
 class SetPagination(PageNumberPagination):
     page_size = 1

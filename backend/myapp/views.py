@@ -1,17 +1,17 @@
 from urllib import response
 from django.http import JsonResponse
 from django.shortcuts import render, HttpResponse
-from matplotlib.font_manager import json_dump
+import json
 from rest_framework.response import Response
 from rest_framework import status,generics
 
-
+from django.core import serializers
 from rest_framework.decorators import authentication_classes,permission_classes
 
-from myapp.models import UserData
+from myapp.models import Person,PersonVisit
 
 from rest_framework.decorators import api_view
-from myapp.seralizers import UserDataSeralizer,SetPagination
+from myapp.seralizers import PersonSeralizer,PersonVisitSeralizer
 from django.http.response import StreamingHttpResponse
 from myapp.camera import VideoCamera, IPWebCam
 
@@ -36,35 +36,43 @@ def contact_us(request):
 def user_list(request):
     # to call get method response = requests.get("http://127.0.0.1:8000/user")
     if(request.method == 'GET'):
-        user = UserData.objects.all()
-        seralizer = UserDataSeralizer(user,many=True)
+        user = Person.objects.all()
+        seralizer = PersonSeralizer(user,many=True)
 
 
         return Response(seralizer.data)
     # to call post metnod requests.post("http://127.0.0.1:8000/user",{'first_name':'ajeet1','last_name':'yadav1'})
     elif request.method == 'POST':
         data = request.data
-        user = UserData.objects.get_or_create(
+        person,createdy = Person.objects.get_or_create(
             first_name = data["first_name"],
             last_name = data["last_name"]
         )
-        data = json_dump(data)
+        PersonVisit.objects.create(person=person)
+        data = json.dumps(data)
+        print(PersonVisit.objects.filter(person=person))
         return Response(data,status=status.HTTP_201_CREATED)
         #     return Response(seralizer.data,status = status.HTTP_201_CREATED)
         # else:
-        return Response(status=status.HTTP_200_OK)
+        # return Response(status=status.HTTP_200_OK)
 @api_view(['PUT','GET','DELETE'])
 def user_detail(request,pk):
     try:
-        user = UserData.objects.get(pk=pk)
-    except UserData.DoesNotExist:
+        user = Person.objects.get(pk=pk)
+    except Person.DoesNotExist:
         return Response(status = status.HTTP_400_BAD_REQUEST)
     
     if(request.method == 'GET'):
-        seralizer = UserDataSeralizer(user)
-        return Response(seralizer.data)
+        seralizer = PersonSeralizer(user)
+        qs = PersonVisit.objects.filter(person = user)
+        l = []
+        for query in qs:
+            vser = PersonVisitSeralizer(qs[0])
+            print(vser.data,qs)
+            l.append(vser.data)
+        return Response(l)
     elif request.method == 'PUT':
-        seralizer = UserDataSeralizer(user,data = request.data)
+        seralizer = PersonSeralizer(user,data = request.data)
         if seralizer.is_valid:
             seralizer.save()
             return Response(seralizer.data,status=status.HTTP_202_ACCEPTED)
