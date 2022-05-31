@@ -1,5 +1,6 @@
 
 from django.db import models
+import datetime
 
 # Create your models here.
 class Person(models.Model):
@@ -18,7 +19,8 @@ class Person(models.Model):
 
 class PersonVisit(models.Model):
     id = models.BigAutoField(primary_key=True)
-    person = models.ForeignKey("Person",on_delete=models.CASCADE)
-    captured_on = models.DateTimeField(auto_now_add=True)
+    person = models.ForeignKey(Person,on_delete=models.CASCADE)
+    captured_onn = models.DateTimeField()
+    
     def __str__(self) -> str:
         return str(self.id)

@@ -11,7 +11,7 @@ class PersonSeralizer(serializers.ModelSerializer):
 class PersonVisitSeralizer(serializers.ModelSerializer):
     class Meta:
         model = PersonVisit
-        fields = ['id','person','captured_on']
+        fields = ['id','person','captured_onn']
 
 class SetPagination(PageNumberPagination):
     page_size = 1

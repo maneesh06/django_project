@@ -1,10 +1,11 @@
+from logging import captureWarnings
 from urllib import response
 from django.http import JsonResponse
 from django.shortcuts import render, HttpResponse
 import json
 from rest_framework.response import Response
 from rest_framework import status,generics
-
+import datetime
 from django.core import serializers
 from rest_framework.decorators import authentication_classes,permission_classes
 
@@ -48,7 +49,8 @@ def user_list(request):
             first_name = data["first_name"],
             last_name = data["last_name"]
         )
-        PersonVisit.objects.create(person=person)
+        captured_onn=datetime.datetime.now()
+        PersonVisit.objects.create(person=person,captured_onn=captured_onn)
         data = json.dumps(data)
         print(PersonVisit.objects.filter(person=person))
         return Response(data,status=status.HTTP_201_CREATED)
@@ -64,11 +66,11 @@ def user_detail(request,pk):
     
     if(request.method == 'GET'):
         seralizer = PersonSeralizer(user)
-        qs = PersonVisit.objects.filter(person = user)
+        qs = PersonVisit.objects.all()
+        qs = qs.filter(person_id = user.pk)
         l = []
         for query in qs:
-            vser = PersonVisitSeralizer(qs[0])
-            print(vser.data,qs)
+            vser = PersonVisitSeralizer(query)
             l.append(vser.data)
         return Response(l)
     elif request.method == 'PUT':
