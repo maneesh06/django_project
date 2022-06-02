@@ -49,10 +49,10 @@ def user_list(request):
             first_name = data["first_name"],
             last_name = data["last_name"]
         )
-        captured_onn=datetime.datetime.now()
-        PersonVisit.objects.create(person=person,captured_onn=captured_onn)
+        # captured_onn=datetime.datetime.now()
+        PersonVisit.objects.create(person=person,captured_onn=datetime.datetime.now())
         data = json.dumps(data)
-        print(PersonVisit.objects.filter(person=person))
+        # print(PersonVisit.objects.filter(person=person))
         return Response(data,status=status.HTTP_201_CREATED)
         #     return Response(seralizer.data,status = status.HTTP_201_CREATED)
         # else:

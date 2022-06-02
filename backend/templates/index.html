@@ -5,5 +5,44 @@ Home
 {% endblock title %}
 
 {% block body %}
-This Body Block
+<h2 style="text-align:center">Welcome to user section</h2>
+<div  id="demo" style="margin: 6%;">
+    <div id="user">
+    
+    </div>
+</div>
+
 {% endblock body %}
+
+{% block script %}
+<script>
+	function run() {
+
+		// Creating Our XMLHttpRequest object
+		var xhr = new XMLHttpRequest();
+
+		// Making our connection
+		var url = 'http://127.0.0.1:8000/user';
+		xhr.open("GET", url, true);
+
+		// function execute after request is successful
+		xhr.onreadystatechange = function () {
+			if (this.readyState == 4 && this.status == 200) {
+                // console.log(this.responseText);
+				var elem = document.getElementById('user');
+
+                // elem.append(this.responseText)
+                user_list = JSON.parse(this.response);
+               
+               console.log(typeof user_list);
+               elem.append(user_list.length)
+			}
+		}
+		// Sending our request
+		xhr.send();
+	}
+    
+	run();
+</script>
+
+{% endblock script %}
