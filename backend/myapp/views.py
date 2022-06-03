@@ -3,6 +3,7 @@ from urllib import response
 from django.http import JsonResponse
 from django.shortcuts import render, HttpResponse
 import json
+from django.forms import BaseModelFormSet,modelformset_factory
 from rest_framework.response import Response
 from rest_framework import status,generics
 import datetime
@@ -29,6 +30,12 @@ def about_us(request):
 def contact_us(request):
     return render(request,"contact_us.html")
 
+class BaseAuthorFormSet(BaseModelFormSet):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.queryset = Person.objects.all()
+
+
 
 
 @api_view(['GET','POST'])
@@ -40,7 +47,9 @@ def user_list(request):
         user = Person.objects.all()
         seralizer = PersonSeralizer(user,many=True)
 
-
+        # AuthorFormSet = modelformset_factory(Person, fields=('first_name', 'last_name'), formset=BaseAuthorFormSet)
+        # author_form=AuthorFormSet(queryset=Person.objects.all())
+        # print(author_form.as_table())
         return Response(seralizer.data)
     # to call post metnod requests.post("http://127.0.0.1:8000/user",{'first_name':'ajeet1','last_name':'yadav1'})
     elif request.method == 'POST':

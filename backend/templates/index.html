@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% block css1 %}<link rel="stylesheet" href="/static/css/index.css">{% endblock css1 %}
 {% block title %}
 Home
 {% endblock title %}
@@ -8,7 +8,7 @@ Home
 <h2 style="text-align:center">Welcome to user section</h2>
 <div  id="demo" style="margin: 6%;">
     <div id="user">
-    
+    <div ></div>
     </div>
 </div>
 
@@ -30,12 +30,13 @@ Home
 			if (this.readyState == 4 && this.status == 200) {
                 // console.log(this.responseText);
 				var elem = document.getElementById('user');
-
+                // elem.append(<div> heelo </div>)
                 // elem.append(this.responseText)
                 user_list = JSON.parse(this.response);
-               
+               var div = document.createElement(div)
+               elem.innerHTML = 55555555
                console.log(typeof user_list);
-               elem.append(user_list.length)
+               elem.append(div)
 			}
 		}
 		// Sending our request
