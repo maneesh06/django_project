@@ -1,9 +1,8 @@
-from dataclasses import field
-from django.utils.safestring import mark_safe
+
 from django.contrib import admin
-from matplotlib import image
-from .models import Person,PersonVisit
-from django.utils.safestring import mark_safe
+
+from .models import Person,PersonVisit,Unknown
+
 
 class PersonVisitInline(admin.TabularInline):
     model = PersonVisit
@@ -16,8 +15,9 @@ class PersonAdmin(admin.ModelAdmin):
     # fields = ("first_name","last_name")
     readonly_fields=("id","captured_on")
 
-    # def _image(self, obj:Person):
-    #     return mark_safe( f"<a href='{/django_project/backend/DSC_0052.JPG}'>{self.image}</a>" )
-        # return "hello"
+@admin.register(Unknown)
+class Unknown(admin.ModelAdmin):
+    list_display = ("id","captured_on","unknown_photo")
+    readonly_fields = ("id","captured_on","unknown_photo")
 
 # Register your models here.

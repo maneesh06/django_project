@@ -3,17 +3,13 @@ from urllib import response
 from django.http import JsonResponse
 from django.shortcuts import render, HttpResponse
 import json
-from django.forms import BaseModelFormSet,modelformset_factory
+from django.forms import BaseModelFormSet
 from rest_framework.response import Response
-from rest_framework import status,generics
+from rest_framework import status
 import datetime
-from django.core import serializers
-from rest_framework.decorators import authentication_classes,permission_classes
-
-from myapp.models import Person,PersonVisit
-
+from myapp.models import Person,PersonVisit,Unknown
 from rest_framework.decorators import api_view
-from myapp.seralizers import PersonSeralizer,PersonVisitSeralizer
+from myapp.seralizers import PersonSeralizer,PersonVisitSeralizer,UnknownVisitSeralizer
 from django.http.response import StreamingHttpResponse
 from myapp.camera import VideoCamera, IPWebCam
 
@@ -39,17 +35,11 @@ class BaseAuthorFormSet(BaseModelFormSet):
 
 
 @api_view(['GET','POST'])
-# @authentication_classes([ BasicAuthentication])
-# @permission_classes([IsAuthenticated])
 def user_list(request):
     # to call get method response = requests.get("http://127.0.0.1:8000/user")
     if(request.method == 'GET'):
         user = Person.objects.all()
         seralizer = PersonSeralizer(user,many=True)
-
-        # AuthorFormSet = modelformset_factory(Person, fields=('first_name', 'last_name'), formset=BaseAuthorFormSet)
-        # author_form=AuthorFormSet(queryset=Person.objects.all())
-        # print(author_form.as_table())
         return Response(seralizer.data)
     # to call post metnod requests.post("http://127.0.0.1:8000/user",{'first_name':'ajeet1','last_name':'yadav1'})
     elif request.method == 'POST':
