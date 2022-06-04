@@ -22,12 +22,12 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
+              {% comment %} <li class="nav-item">
                 <a class="nav-link active" href="/">Home</a>
-              </li>
+              </li> {% endcomment %}
               
               <li class="nav-item dropdown">
-                <a class="nav-link active" href="/about_us">About us</a>
+                <a class="nav-link active" href="/">About us</a>
               </li>
             
               <li class="nav-item">
@@ -37,16 +37,16 @@
                 <a class="nav-link active" href="/contact_us">Contact Us</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active" href="/user"> User</a>
+                <a class="nav-link active" href="/admin/myapp/person"> Admin</a>
               </li>
               </li>
               
     
             </ul>
-            <form class="d-flex">
+            {% comment %} <form class="d-flex">
               <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
               <button class="btn btn-outline-success" type="submit">Search</button>
-            </form>
+            </form> {% endcomment %}
           </div>
         </div>
       </nav>

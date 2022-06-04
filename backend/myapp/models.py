@@ -20,7 +20,7 @@ class Unknown(models.Model):
         return truncatechars(self.description,20)
     
     def unknown_photo(self):
-        return mark_safe('<img src="{}" width="200" />'.format(self.image.url))
+        return mark_safe('<img src="{}" width="100" height="50"/>'.format(self.image.url))
     unknown_photo.short_description = "Image"
     unknown_photo.allow_tags = True
 
