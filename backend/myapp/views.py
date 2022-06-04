@@ -56,16 +56,16 @@ def user_list(request):
         data = request.data
         person,createdy = Person.objects.get_or_create(
             first_name = data["first_name"],
-            last_name = data["last_name"]
+            last_name = data["last_name"],
+            roll_no = data["roll_no"],
+            image = data["image"],
         )
         # captured_onn=datetime.datetime.now()
         PersonVisit.objects.create(person=person,captured_onn=datetime.datetime.now())
         data = json.dumps(data)
         # print(PersonVisit.objects.filter(person=person))
         return Response(data,status=status.HTTP_201_CREATED)
-        #     return Response(seralizer.data,status = status.HTTP_201_CREATED)
-        # else:
-        # return Response(status=status.HTTP_200_OK)
+        
 @api_view(['PUT','GET','DELETE'])
 def user_detail(request,pk):
     try:

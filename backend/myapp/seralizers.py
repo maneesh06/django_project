@@ -6,7 +6,9 @@ from myapp.models import Person,PersonVisit
 class PersonSeralizer(serializers.ModelSerializer):
     class Meta:
         model = Person
-        fields = ['id','first_name','last_name','captured_on']
+        fields = ['id','first_name','last_name','captured_on','roll_no','admin_photo']
+    
+
 
 class PersonVisitSeralizer(serializers.ModelSerializer):
     class Meta:
