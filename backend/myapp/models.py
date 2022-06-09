@@ -26,6 +26,9 @@ class Unknown(models.Model):
 
 
 class Person(models.Model):
+    # class Meta:
+    #     models.UniqueConstraint(name = "rool",fields=['roll_no'])
+
     id = models.BigAutoField(primary_key=True)
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
@@ -33,6 +36,9 @@ class Person(models.Model):
     roll_no = models.IntegerField()
     captured_on = models.DateTimeField(auto_now_add=True)
 
+
+    def __str__(self) -> str:
+        return self.first_name+self.last_name
     @property
     def short_description(self):
         return truncatechars(self.description,20)
@@ -41,9 +47,6 @@ class Person(models.Model):
         return mark_safe('<img src="{}" width="100" height ="100" />'.format(self.image.url))
     admin_photo.short_description = "Image"
     admin_photo.allow_tags = True
-
-    def __str__(self) -> str:
-        return self.first_name+self.last_name
 
 # class Person(models.Model):
 #     id = models.BigAutoField(primary_key=True)

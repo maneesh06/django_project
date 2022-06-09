@@ -55,13 +55,26 @@ def user_list(request):
         captured_onn=datetime.datetime.now().strftime('%Y-%m-%d %H-%M-%S')
         image_file = os.path.join(base_dir,f'media/photos/22/{captured_onn}')
         img.save(f'{image_file}.jpg')
-        person,createdy = Person.objects.get_or_create(
-            first_name = data["first_name"],
-            last_name = data["last_name"],
-            roll_no = data["roll_no"],
-            image = f"photos/22/{captured_onn}.jpg",
-            
-        )
+        roll_no = data["roll_no"],
+
+        print("*"*100)
+        print(type(int(roll_no[0])),roll_no[0],len(roll_no))
+        roll_no = int(roll_no[0])
+        try:
+            person = Person.objects.get(roll_no = roll_no)
+            print("`"*55)
+            print(type(Person.objects.get(roll_no=roll_no)))
+        except:
+            person= Person.objects.create(
+                first_name = data["first_name"],
+                last_name = data["last_name"],
+                roll_no = roll_no,
+                image = f"photos/22/{captured_onn}.jpg",
+                
+            )
+            print("`"*55)
+            print(type(roll_no),roll_no)
+            print("hello",Person.objects.get(roll_no = roll_no))
         # captured_onn=datetime.datetime.now()
         PersonVisit.objects.create(person=person,captured_onn=datetime.datetime.now())
         data = json.dumps(data)

@@ -16,6 +16,6 @@ im_b64 = base64.b64encode(im_bytes).decode("utf8")
 # print(files)
 # response = requests.get("http://127.0.0.1:8000/user?page=1")
 url ="http://127.0.0.1:8000/user"
-res = requests.post(url,{'image':im_b64, 'first_name':'raj',"last_name":"krishnan","roll_no":1805231041})
+res = requests.post(url,{'image':im_b64, 'first_name':'raj',"last_name":"","roll_no":1805231041})
 # res = requests.post(url,{'image':im_b64})
 print(res)

@@ -8,7 +8,7 @@ from myapp.seralizers import UnknownVisitSeralizer
 from PIL import Image
 import io
 import datetime
-import numpy as np
+
 from pathlib import Path
 
 
@@ -24,14 +24,10 @@ def unknown_list(request):
         data = request.data
         im_b64 = data["image"]
         img_bytes = base64.b64decode(im_b64.encode('utf-8'))
-
         img = Image.open(io.BytesIO(img_bytes))
-
         base_dir = Path.cwd()
         captured_onn=datetime.datetime.now().strftime('%Y-%m-%d %H-%M-%S')
-
         image_file = os.path.join(base_dir,f'media/unknown/22/{captured_onn}')
-        print(image_file)
         img.save(f'{image_file}.jpg')
         Unknown.objects.create(
             image = f"unknown/22/{captured_onn}.jpg",
