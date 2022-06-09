@@ -49,6 +49,7 @@ def user_list(request):
             last_name = data["last_name"],
             roll_no = data["roll_no"],
             image = data["image"],
+            
         )
         # captured_onn=datetime.datetime.now()
         PersonVisit.objects.create(person=person,captured_onn=datetime.datetime.now())
