@@ -54,7 +54,8 @@ def user_list(request):
         base_dir = Path.cwd()
         captured_onn=datetime.datetime.now().strftime('%Y-%m-%d %H-%M-%S')
         image_file = os.path.join(base_dir,f'media/photos/22/{captured_onn}')
-        img.save(f'{image_file}.jpg')
+        # img.save(f'{image_file}.jpg')
+        img.save(f'{image_file}.jpg',optimize=True,quality=20)
         roll_no = data["roll_no"],
 
         print("*"*100)
