@@ -7,7 +7,7 @@ from rest_framework.decorators import api_view
 from myapp.seralizers import UnknownVisitSeralizer
 from PIL import Image
 import io
-import cv2
+import datetime
 import numpy as np
 from pathlib import Path
 
@@ -24,24 +24,17 @@ def unknown_list(request):
         data = request.data
         im_b64 = data["image"]
         img_bytes = base64.b64decode(im_b64.encode('utf-8'))
-        # convert bytes data to PIL Image object
+
         img = Image.open(io.BytesIO(img_bytes))
-        # img_arr = np.asarray(img)    
-        print('*'*25, Path.cwd())
-        # print(img_bytes,"/"*25)
-        # img.show()
+
         base_dir = Path.cwd()
-        image_file = os.path.join(base_dir,'media/unknown/22/monu.jpg')
-        img.save(image_file)
-        # image_file = 'media/photos/22/prashant.jpg'
-        
-        # with open(image_file, "rb") as f:
-        #     im_bytes = f.read()
-        # img = cv2.imread(image_file)
+        captured_onn=datetime.datetime.now().strftime('%Y-%m-%d %H-%M-%S')
+
+        image_file = os.path.join(base_dir,f'media/unknown/22/{captured_onn}')
+        print(image_file)
+        img.save(f'{image_file}.jpg')
         Unknown.objects.create(
-            image ="unknown/22/monu.jpg",
+            image = f"unknown/22/{captured_onn}.jpg",
     
         )
-        # print(data["image"],"*"*11)
-       
         return Response(status=status.HTTP_201_CREATED)

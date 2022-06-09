@@ -12,7 +12,11 @@ from rest_framework.decorators import api_view
 from myapp.seralizers import PersonSeralizer,PersonVisitSeralizer,UnknownVisitSeralizer
 from django.http.response import StreamingHttpResponse
 from myapp.camera import VideoCamera, IPWebCam
-
+import base64
+from PIL import Image
+import os
+import io
+from pathlib import Path
 # Create your views here.
 def index(request):
     return render(request,"index.html")
@@ -44,11 +48,18 @@ def user_list(request):
     # to call post metnod requests.post("http://127.0.0.1:8000/user",{'first_name':'ajeet1','last_name':'yadav1'})
     elif request.method == 'POST':
         data = request.data
+        im_b64 = data["image"]
+        img_bytes = base64.b64decode(im_b64.encode('utf-8'))
+        img = Image.open(io.BytesIO(img_bytes))
+        base_dir = Path.cwd()
+        captured_onn=datetime.datetime.now().strftime('%Y-%m-%d %H-%M-%S')
+        image_file = os.path.join(base_dir,f'media/photos/22/{captured_onn}')
+        img.save(f'{image_file}.jpg')
         person,createdy = Person.objects.get_or_create(
             first_name = data["first_name"],
             last_name = data["last_name"],
             roll_no = data["roll_no"],
-            image = data["image"],
+            image = f"photos/22/{captured_onn}.jpg",
             
         )
         # captured_onn=datetime.datetime.now()

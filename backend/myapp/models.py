@@ -38,7 +38,7 @@ class Person(models.Model):
         return truncatechars(self.description,20)
     
     def admin_photo(self):
-        return mark_safe('<img src="{}" width="200" />'.format(self.image.url))
+        return mark_safe('<img src="{}" width="100" height ="100" />'.format(self.image.url))
     admin_photo.short_description = "Image"
     admin_photo.allow_tags = True
 

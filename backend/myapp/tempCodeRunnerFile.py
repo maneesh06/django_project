@@ -1,14 +1,3 @@
-from django.test import TestCase
-
-# Create your tests here.
-# Import the required modules
-import os
-from PIL import Image
-from datetime import datetime
-
-
-# Main function
-
 
 picture_path = "image.jpg"
 
